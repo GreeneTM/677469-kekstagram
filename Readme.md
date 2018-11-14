@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм» [![Build status][travis-image]][travis-url]
 
 * Студент: [Денис Угрин](https://up.htmlacademy.ru/javascript/16/user/677469).
-* Наставник: `Неизвестно`.
+* Наставник: [Артём Коновалов] (https://htmlacademy.ru/profile/id297399).
 
 ---
 
