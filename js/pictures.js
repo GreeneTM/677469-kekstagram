@@ -30,13 +30,31 @@ function randomInteger(min, max) {
   return rand;
 }
 
+var makesComments = function () {
+  if (randomInteger(1, 2) > 1) {
+    var objectComments = randomElementFromArray(commentsList) + ' ' + randomElementFromArray(commentsList);
+    return objectComments;
+  } else {
+    objectComments = randomElementFromArray(commentsList);
+    return objectComments;
+  }
+};
+
+var randomElementFromComment = function () {
+  var comments = [];
+  for (var i = 0; i < randomInteger(1, 6); i++) {
+    comments[i] = makesComments();
+  }
+  return comments;
+};
+
 var generatesAnArray = function () {
   var object = [];
   for (var i = 0; i < NUMBER_OF_OBJECTS; i++) {
     object[i] = {
       url: 'photos/' + (i + 1) + '.jpg',
       likes: randomInteger(15, 200),
-      comments: randomElementFromArray(commentsList),
+      comments: randomElementFromComment(),
       description: randomElementFromArray(descriptionList)
     }
   }
