@@ -1,7 +1,7 @@
 'use strict';
 var NUMBER_OF_OBJECTS = 25;
 var bigPicture = document.querySelector('.big-picture');
-bigPicture.classList.remove('hidden');
+// bigPicture.classList.remove('hidden');
 
 var commentsList = [
   'Всё отлично!',
@@ -11,6 +11,7 @@ var commentsList = [
   'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
 ];
+
 var descriptionList = [
   'Тестим новую камеру!',
   'Затусили с друзьями на море',
@@ -24,11 +25,11 @@ var randomElementFromArray = function (items) {
   return items[Math.floor(Math.random() * items.length)];
 };
 
-function randomInteger(min, max) {
+var randomInteger = function (min, max) {
   var rand = min + Math.random() * (max + 1 - min);
   rand = Math.floor(rand);
   return rand;
-}
+};
 
 var makesComments = function () {
   if (randomInteger(1, 2) > 1) {
@@ -41,11 +42,11 @@ var makesComments = function () {
 };
 
 var randomElementFromComment = function () {
-  var comments = [];
+  var say = [];
   for (var i = 0; i < randomInteger(1, 6); i++) {
-    comments[i] = makesComments();
+    say[i] = makesComments();
   }
-  return comments;
+  return say;
 };
 
 var generatesAnArray = function () {
@@ -56,7 +57,7 @@ var generatesAnArray = function () {
       likes: randomInteger(15, 200),
       comments: randomElementFromComment(),
       description: randomElementFromArray(descriptionList)
-    }
+    };
   }
   return object;
 };
@@ -64,18 +65,17 @@ var generatesAnArray = function () {
 var photos = generatesAnArray();
 
 var pictures = document.querySelector('.pictures');
-var template = document.querySelector('#picture').content.querySelector('a');
+var templatePictures = document.querySelector('#picture').content.querySelector('a');
 var fragment = document.createDocumentFragment();
 
 for (var i = 0; i < photos.length; i++) {
-
-  var element = template.cloneNode(true);
+  var element = templatePictures.cloneNode(true);
   element.querySelector('img').src = photos[i].url;
   element.querySelector('.picture__likes').textContent = photos[i].likes;
-  element.querySelector('.picture__comments').textContent = photos[i].comments;
+  element.querySelector('.picture__comments').textContent = photos[i].comments.length;
   fragment.appendChild(element);
 }
-  pictures.appendChild(fragment);
+pictures.appendChild(fragment);
 
 
 var bigPictureImg = bigPicture.querySelector('img');
