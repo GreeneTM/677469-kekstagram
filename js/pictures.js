@@ -214,4 +214,7 @@ socialCaption.textContent = photo[0].description;
 var socialText = bigPicture.querySelectorAll('.social__text');
 socialText[0].textContent = randomSelections(commentsList);
 socialText[1].textContent = randomSelections(commentsList);
+var socialPicture = bigPicture.querySelectorAll('.social__picture');
+socialPicture[1].setAttribute('src', 'img/avatar-' + randomInteger(1, 6) + '.svg');
+socialPicture[2].setAttribute('src', 'img/avatar-' + randomInteger(1, 6) + '.svg');
 
