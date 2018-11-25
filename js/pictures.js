@@ -1,6 +1,6 @@
 'use strict';
-// var bigPicture = document.querySelector('.big-picture');
-// bigPicture.classList.remove('hidden');
+var bigPicture = document.querySelector('.big-picture');
+bigPicture.classList.remove('hidden');
 
 var commentsList = [
   'Всё отлично!',
@@ -184,25 +184,29 @@ var photo = [
 
 var pictures = document.querySelector('.pictures');
 var template = document.querySelector('#picture').content.querySelector('a');
-var linkSrc = template.querySelector('img');
-var linkLikes = template.querySelector('.picture__likes');
-var linkComments = template.querySelector('.picture__comments');
+
 
 for (var i = 0; i < photo.length; i++) {
   var fragment = document.createDocumentFragment();
 
-  var element = linkSrc.cloneNode(true);
-  element.src = photo[i].url;
+  var element = template.cloneNode(true);
+  element.querySelector('img').src = photo[i].url;
   fragment.appendChild(element);
 
-  var elementLikes = linkLikes.cloneNode(true);
-  elementLikes.textContent = photo[i].likes;
-  fragment.appendChild(elementLikes);
+  element.querySelector('.picture__likes').textContent = photo[i].likes;
+  fragment.appendChild(element);
 
-  var elementComments = linkComments.cloneNode(true);
-  elementComments.textContent = photo[i].comments;
-  fragment.appendChild(elementComments);
+  element.querySelector('.picture__comments').textContent = photo[i].comments;
+  fragment.appendChild(element);
 
-  pictures.appendChild(element);
+  pictures.appendChild(fragment);
 }
+
+var bigPictureImg = bigPicture.querySelector('img');
+var likesCount = bigPicture.querySelector('.likes-count');
+var socialCaption = bigPicture.querySelector('.social__caption')
+bigPictureImg.setAttribute('src', photo[0].url);
+likesCount.textContent = photo[0].likes;
+socialCaption.textContent = photo[0].description;
+
 
