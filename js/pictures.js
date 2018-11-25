@@ -204,7 +204,7 @@ for (var i = 0; i < photo.length; i++) {
 
 var bigPictureImg = bigPicture.querySelector('img');
 var likesCount = bigPicture.querySelector('.likes-count');
-var socialCaption = bigPicture.querySelector('.social__caption')
+var socialCaption = bigPicture.querySelector('.social__caption');
 bigPictureImg.setAttribute('src', photo[0].url);
 likesCount.textContent = photo[0].likes;
 socialCaption.textContent = photo[0].description;
