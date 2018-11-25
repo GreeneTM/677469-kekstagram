@@ -1,4 +1,5 @@
 'use strict';
+var NUMBER_OF_OBJECTS = 25;
 var bigPicture = document.querySelector('.big-picture');
 bigPicture.classList.remove('hidden');
 
@@ -19,7 +20,7 @@ var descriptionList = [
   'Вот это тачка!'
 ];
 
-var randomSelections = function (items) {
+var randomElementFromArray = function (items) {
   return items[Math.floor(Math.random() * items.length)];
 };
 
@@ -29,191 +30,48 @@ function randomInteger(min, max) {
   return rand;
 }
 
-var photo = [
-  {
-    url: 'photos/1.jpg',
-    likes: randomInteger(15, 200),
-    comments: randomSelections(commentsList),
-    description: randomSelections(descriptionList)
-  },
-  {
-    url: 'photos/2.jpg',
-    likes: randomInteger(15, 200),
-    comments: randomSelections(commentsList),
-    description: randomSelections(descriptionList)
-  },
-  {
-    url: 'photos/3.jpg',
-    likes: randomInteger(15, 200),
-    comments: randomSelections(commentsList),
-    description: randomSelections(descriptionList)
-  },
-  {
-    url: 'photos/4.jpg',
-    likes: randomInteger(15, 200),
-    comments: randomSelections(commentsList),
-    description: randomSelections(descriptionList)
-  },
-  {
-    url: 'photos/5.jpg',
-    likes: randomInteger(15, 200),
-    comments: randomSelections(commentsList),
-    description: randomSelections(descriptionList)
-  },
-  {
-    url: 'photos/6.jpg',
-    likes: randomInteger(15, 200),
-    comments: randomSelections(commentsList),
-    description: randomSelections(descriptionList)
-  },
-  {
-    url: 'photos/7.jpg',
-    likes: randomInteger(15, 200),
-    comments: randomSelections(commentsList),
-    description: randomSelections(descriptionList)
-  },
-  {
-    url: 'photos/8.jpg',
-    likes: randomInteger(15, 200),
-    comments: randomSelections(commentsList),
-    description: randomSelections(descriptionList)
-  },
-  {
-    url: 'photos/9.jpg',
-    likes: randomInteger(15, 200),
-    comments: randomSelections(commentsList),
-    description: randomSelections(descriptionList)
-  },
-  {
-    url: 'photos/10.jpg',
-    likes: randomInteger(15, 200),
-    comments: randomSelections(commentsList),
-    description: randomSelections(descriptionList)
-  },
-  {
-    url: 'photos/11.jpg',
-    likes: randomInteger(15, 200),
-    comments: randomSelections(commentsList),
-    description: randomSelections(descriptionList)
-  },
-  {
-    url: 'photos/12.jpg',
-    likes: randomInteger(15, 200),
-    comments: randomSelections(commentsList),
-    description: randomSelections(descriptionList)
-  },
-  {
-    url: 'photos/13.jpg',
-    likes: randomInteger(15, 200),
-    comments: randomSelections(commentsList),
-    description: randomSelections(descriptionList)
-  },
-  {
-    url: 'photos/14.jpg',
-    likes: randomInteger(15, 200),
-    comments: randomSelections(commentsList),
-    description: randomSelections(descriptionList)
-  },
-  {
-    url: 'photos/15.jpg',
-    likes: randomInteger(15, 200),
-    comments: randomSelections(commentsList),
-    description: randomSelections(descriptionList)
-  },
-  {
-    url: 'photos/16.jpg',
-    likes: randomInteger(15, 200),
-    comments: randomSelections(commentsList),
-    description: randomSelections(descriptionList)
-  },
-  {
-    url: 'photos/17.jpg',
-    likes: randomInteger(15, 200),
-    comments: randomSelections(commentsList),
-    description: randomSelections(descriptionList)
-  },
-  {
-    url: 'photos/18.jpg',
-    likes: randomInteger(15, 200),
-    comments: randomSelections(commentsList),
-    description: randomSelections(descriptionList)
-  },
-  {
-    url: 'photos/19.jpg',
-    likes: randomInteger(15, 200),
-    comments: randomSelections(commentsList),
-    description: randomSelections(descriptionList)
-  },
-  {
-    url: 'photos/20.jpg',
-    likes: randomInteger(15, 200),
-    comments: randomSelections(commentsList),
-    description: randomSelections(descriptionList)
-  },
-  {
-    url: 'photos/21.jpg',
-    likes: randomInteger(15, 200),
-    comments: randomSelections(commentsList),
-    description: randomSelections(descriptionList)
-  },
-  {
-    url: 'photos/22.jpg',
-    likes: randomInteger(15, 200),
-    comments: randomSelections(commentsList),
-    description: randomSelections(descriptionList)
-  },
-  {
-    url: 'photos/23.jpg',
-    likes: randomInteger(15, 200),
-    comments: randomSelections(commentsList),
-    description: randomSelections(descriptionList)
-  },
-  {
-    url: 'photos/24.jpg',
-    likes: randomInteger(15, 200),
-    comments: randomSelections(commentsList),
-    description: randomSelections(descriptionList)
-  },
-  {
-    url: 'photos/25.jpg',
-    likes: randomInteger(15, 200),
-    comments: randomSelections(commentsList),
-    description: randomSelections(descriptionList)
-  },
-];
+var generatesAnArray = function () {
+  var object = [];
+  for (var i = 0; i < NUMBER_OF_OBJECTS; i++) {
+    object[i] = {
+      url: 'photos/' + (i + 1) + '.jpg',
+      likes: randomInteger(15, 200),
+      comments: randomElementFromArray(commentsList),
+      description: randomElementFromArray(descriptionList)
+    }
+  }
+  return object;
+};
+
+var photos = generatesAnArray();
 
 var pictures = document.querySelector('.pictures');
 var template = document.querySelector('#picture').content.querySelector('a');
+var fragment = document.createDocumentFragment();
 
-
-for (var i = 0; i < photo.length; i++) {
-  var fragment = document.createDocumentFragment();
+for (var i = 0; i < photos.length; i++) {
 
   var element = template.cloneNode(true);
-  element.querySelector('img').src = photo[i].url;
+  element.querySelector('img').src = photos[i].url;
+  element.querySelector('.picture__likes').textContent = photos[i].likes;
+  element.querySelector('.picture__comments').textContent = photos[i].comments;
   fragment.appendChild(element);
-
-  element.querySelector('.picture__likes').textContent = photo[i].likes;
-  fragment.appendChild(element);
-
-  element.querySelector('.picture__comments').textContent = photo[i].comments;
-  fragment.appendChild(element);
-
-  pictures.appendChild(fragment);
 }
+  pictures.appendChild(fragment);
+
 
 var bigPictureImg = bigPicture.querySelector('img');
 var likesCount = bigPicture.querySelector('.likes-count');
 var socialCaption = bigPicture.querySelector('.social__caption');
-bigPictureImg.setAttribute('src', photo[0].url);
-likesCount.textContent = photo[0].likes;
-socialCaption.textContent = photo[0].description;
+bigPictureImg.src = photos[0].url;
+likesCount.textContent = photos[0].likes;
+socialCaption.textContent = photos[0].description;
 
 // ------------------------------------------------------------------------;
 
 var socialText = bigPicture.querySelectorAll('.social__text');
-socialText[0].textContent = randomSelections(commentsList);
-socialText[1].textContent = randomSelections(commentsList);
+socialText[0].textContent = randomElementFromArray(commentsList);
+socialText[1].textContent = randomElementFromArray(commentsList);
 var socialPicture = bigPicture.querySelectorAll('.social__picture');
 socialPicture[1].setAttribute('src', 'img/avatar-' + randomInteger(1, 6) + '.svg');
 socialPicture[2].setAttribute('src', 'img/avatar-' + randomInteger(1, 6) + '.svg');
