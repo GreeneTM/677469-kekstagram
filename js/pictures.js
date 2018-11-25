@@ -209,4 +209,9 @@ bigPictureImg.setAttribute('src', photo[0].url);
 likesCount.textContent = photo[0].likes;
 socialCaption.textContent = photo[0].description;
 
+// ------------------------------------------------------------------------;
+
+var socialText = bigPicture.querySelectorAll('.social__text');
+socialText[0].textContent = randomSelections(commentsList);
+socialText[1].textContent = randomSelections(commentsList);
 
