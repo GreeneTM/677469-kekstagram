@@ -82,19 +82,35 @@ var firstPhotos = photos[0];
 var bigPictureImg = bigPicture.querySelector('img');
 var likesCount = bigPicture.querySelector('.likes-count');
 var socialCaption = bigPicture.querySelector('.social__caption');
+var commentsCount = bigPicture.querySelector('.comments-count');
 bigPictureImg.src = firstPhotos.url;
 likesCount.textContent = firstPhotos.likes;
 socialCaption.textContent = firstPhotos.description;
+commentsCount.textContent = firstPhotos.comments.length;
 
 // ------------------------------------------------------------------------;
 
-var socialText = bigPicture.querySelectorAll('.social__text');
-socialText[0].textContent = randomElementFromArray(commentsList);
-socialText[1].textContent = randomElementFromArray(commentsList);
-var socialPicture = bigPicture.querySelectorAll('.social__picture');
-socialPicture[1].src = 'img/avatar-' + randomInteger(1, 6) + '.svg';
-socialPicture[2].src = 'img/avatar-' + randomInteger(1, 6) + '.svg';
-// var socialCommentCount = bigPicture.querySelector('.social__comment-count');
-// socialCommentCount.classList.add('visually-hidden');
-// var commentsLoader = bigPicture.querySelector('.comments-loader');
-// commentsLoader.classList.add('visually-hidden');
+var socialComments = bigPicture.querySelector('.social__comments');
+socialComments.insertAdjacentHTML('beforeend', '<li class="social__comment">\n' +
+  '  <img class="social__picture" ' +
+  'src="img/avatar-' + randomInteger(1, 6) + '.svg"\n' +
+  '    alt="Аватар комментатора фотографии"\n' +
+  '    width="35" height="35">\n' +
+  '    <p class="social__text">' + randomElementFromArray(commentsList) + '</p>\n' +
+  '</li>');
+
+// ____________________________________________________________________________;
+
+// var socialText = bigPicture.querySelectorAll('.social__text');
+// socialText[0].textContent = randomElementFromArray(commentsList);
+// socialText[1].textContent = randomElementFromArray(commentsList);
+// var socialPicture = bigPicture.querySelectorAll('.social__picture');
+// socialPicture[1].src = 'img/avatar-' + randomInteger(1, 6) + '.svg';
+// socialPicture[2].src = 'img/avatar-' + randomInteger(1, 6) + '.svg';
+
+// _____________________________________________________________________________;
+
+var socialCommentCount = bigPicture.querySelector('.social__comment-count');
+socialCommentCount.classList.add('visually-hidden');
+var commentsLoader = bigPicture.querySelector('.comments-loader');
+commentsLoader.classList.add('visually-hidden');
