@@ -69,21 +69,22 @@ var templatePictures = document.querySelector('#picture').content.querySelector(
 var fragment = document.createDocumentFragment();
 
 for (var i = 0; i < photos.length; i++) {
+  var indexpPhotos = photos[i];
   var element = templatePictures.cloneNode(true);
-  element.querySelector('img').src = photos[i].url;
-  element.querySelector('.picture__likes').textContent = photos[i].likes;
-  element.querySelector('.picture__comments').textContent = photos[i].comments.length;
+  element.querySelector('img').src = indexpPhotos.url;
+  element.querySelector('.picture__likes').textContent = indexpPhotos.likes;
+  element.querySelector('.picture__comments').textContent = indexpPhotos.comments.length;
   fragment.appendChild(element);
 }
 pictures.appendChild(fragment);
 
-
+var firstPhotos = photos[0];
 var bigPictureImg = bigPicture.querySelector('img');
 var likesCount = bigPicture.querySelector('.likes-count');
 var socialCaption = bigPicture.querySelector('.social__caption');
-bigPictureImg.src = photos[0].url;
-likesCount.textContent = photos[0].likes;
-socialCaption.textContent = photos[0].description;
+bigPictureImg.src = firstPhotos.url;
+likesCount.textContent = firstPhotos.likes;
+socialCaption.textContent = firstPhotos.description;
 
 // ------------------------------------------------------------------------;
 
