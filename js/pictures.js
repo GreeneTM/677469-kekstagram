@@ -50,16 +50,16 @@ var randomElementFromComment = function () {
 };
 
 var generatesAnArray = function () {
-  var object = [];
+  var array = [];
   for (var i = 0; i < NUMBER_OF_OBJECTS; i++) {
-    object[i] = {
+    array[i] = {
       url: 'photos/' + (i + 1) + '.jpg',
       likes: randomInteger(15, 200),
       comments: randomElementFromComment(),
       description: randomElementFromArray(descriptionList)
     };
   }
-  return object;
+  return array;
 };
 
 var photos = generatesAnArray();
