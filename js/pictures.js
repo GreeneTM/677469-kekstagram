@@ -1,7 +1,7 @@
 'use strict';
 var NUMBER_OF_OBJECTS = 25;
 var bigPicture = document.querySelector('.big-picture');
-// bigPicture.classList.remove('hidden');
+bigPicture.classList.remove('hidden');
 
 var commentsList = [
   'Всё отлично!',
@@ -92,9 +92,9 @@ var socialText = bigPicture.querySelectorAll('.social__text');
 socialText[0].textContent = randomElementFromArray(commentsList);
 socialText[1].textContent = randomElementFromArray(commentsList);
 var socialPicture = bigPicture.querySelectorAll('.social__picture');
-socialPicture[1].setAttribute('src', 'img/avatar-' + randomInteger(1, 6) + '.svg');
-socialPicture[2].setAttribute('src', 'img/avatar-' + randomInteger(1, 6) + '.svg');
+socialPicture[1].src = 'img/avatar-' + randomInteger(1, 6) + '.svg';
+socialPicture[2].src = 'img/avatar-' + randomInteger(1, 6) + '.svg';
 var socialCommentCount = bigPicture.querySelector('.social__comment-count');
-socialCommentCount.classList.add('visually-hidden');
+// socialCommentCount.classList.add('visually-hidden');
 var commentsLoader = bigPicture.querySelector('.comments-loader');
-commentsLoader.classList.add('visually-hidden');
+// commentsLoader.classList.add('visually-hidden');
