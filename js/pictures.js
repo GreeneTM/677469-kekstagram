@@ -29,22 +29,22 @@ var randomInteger = function (min, max) {
 };
 
 var makesComment = function () {
-  var firstNumber = 1;
-  var secondNumber = 2;
+  var minCommentValue = 1;
+  var maxCommentValue = 2;
   var lineComments;
-  if (randomInteger(firstNumber, secondNumber) > firstNumber) {
+  if (randomInteger(minCommentValue, maxCommentValue) > minCommentValue) {
     lineComments = randomElementFromArray(commentsList) + ' ' + randomElementFromArray(commentsList);
     return lineComments;
   } lineComments = randomElementFromArray(commentsList);
   return lineComments;
 };
 
-var randomListFromComment = function () {
-  var utterances = [];
+var creatingСomments = function () {
+  var comments = [];
   for (var i = 0; i < randomInteger(1, 6); i++) {
-    utterances[i] = makesComment();
+    comments[i] = makesComment();
   }
-  return utterances;
+  return comments;
 };
 
 var generatesAnArray = function () {
@@ -53,7 +53,7 @@ var generatesAnArray = function () {
     photos[i] = {
       url: 'photos/' + (i + 1) + '.jpg',
       likes: randomInteger(15, 200),
-      comments: randomListFromComment(),
+      comments: creatingСomments(),
       description: randomElementFromArray(descriptionList)
     };
   }
