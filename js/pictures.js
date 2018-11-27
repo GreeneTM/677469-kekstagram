@@ -29,13 +29,14 @@ var randomInteger = function (min, max) {
 };
 
 var makesComment = function () {
-  if (randomInteger(1, 2) > 1) {
-    var lineComments = randomElementFromArray(commentsList) + ' ' + randomElementFromArray(commentsList);
+  var firstNumber = 1;
+  var secondNumber = 2;
+  var lineComments;
+  if (randomInteger(firstNumber, secondNumber) > firstNumber) {
+    lineComments = randomElementFromArray(commentsList) + ' ' + randomElementFromArray(commentsList);
     return lineComments;
-  } else {
-    lineComments = randomElementFromArray(commentsList);
-    return lineComments;
-  }
+  } lineComments = randomElementFromArray(commentsList);
+  return lineComments;
 };
 
 var randomListFromComment = function () {
