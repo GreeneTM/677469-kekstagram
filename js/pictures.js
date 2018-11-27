@@ -24,8 +24,7 @@ var randomElementFromArray = function (items) {
 };
 
 var randomInteger = function (min, max) {
-  var rand = min + Math.random() * (max + 1 - min);
-  rand = Math.floor(rand);
+  var rand = Math.floor(min + Math.random() * (max + 1 - min));
   return rand;
 };
 
