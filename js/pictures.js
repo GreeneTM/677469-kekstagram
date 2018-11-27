@@ -1,7 +1,5 @@
 'use strict';
-var NUMBER_OF_OBJECTS = 25;
-var bigPicture = document.querySelector('.big-picture');
-bigPicture.classList.remove('hidden');
+var NUMBER_OF_PHOTOS = 25;
 
 var commentsList = [
   'Всё отлично!',
@@ -31,35 +29,35 @@ var randomInteger = function (min, max) {
   return rand;
 };
 
-var makesComments = function () {
+var makesComment = function () {
   if (randomInteger(1, 2) > 1) {
-    var objectComments = randomElementFromArray(commentsList) + ' ' + randomElementFromArray(commentsList);
-    return objectComments;
+    var lineComments = randomElementFromArray(commentsList) + ' ' + randomElementFromArray(commentsList);
+    return lineComments;
   } else {
-    objectComments = randomElementFromArray(commentsList);
-    return objectComments;
+    lineComments = randomElementFromArray(commentsList);
+    return lineComments;
   }
 };
 
-var randomElementFromComment = function () {
-  var say = [];
+var randomListFromComment = function () {
+  var utterances = [];
   for (var i = 0; i < randomInteger(1, 6); i++) {
-    say[i] = makesComments();
+    utterances[i] = makesComment();
   }
-  return say;
+  return utterances;
 };
 
 var generatesAnArray = function () {
-  var array = [];
-  for (var i = 0; i < NUMBER_OF_OBJECTS; i++) {
-    array[i] = {
+  var photos = [];
+  for (var i = 0; i < NUMBER_OF_PHOTOS; i++) {
+    photos[i] = {
       url: 'photos/' + (i + 1) + '.jpg',
       likes: randomInteger(15, 200),
-      comments: randomElementFromComment(),
+      comments: randomListFromComment(),
       description: randomElementFromArray(descriptionList)
     };
   }
-  return array;
+  return photos;
 };
 
 var photos = generatesAnArray();
@@ -78,6 +76,9 @@ for (var i = 0; i < photos.length; i++) {
 }
 pictures.appendChild(fragment);
 
+var bigPicture = document.querySelector('.big-picture');
+bigPicture.classList.remove('hidden');
+
 var firstPhotos = photos[0];
 var bigPictureImg = bigPicture.querySelector('img');
 var likesCount = bigPicture.querySelector('.likes-count');
@@ -88,8 +89,6 @@ likesCount.textContent = firstPhotos.likes;
 socialCaption.textContent = firstPhotos.description;
 commentsCount.textContent = firstPhotos.comments.length;
 
-// ------------------------------------------------------------------------;
-
 var socialComments = bigPicture.querySelector('.social__comments');
 socialComments.insertAdjacentHTML('beforeend', '<li class="social__comment">\n' +
   '  <img class="social__picture" ' +
@@ -98,17 +97,6 @@ socialComments.insertAdjacentHTML('beforeend', '<li class="social__comment">\n' 
   '    width="35" height="35">\n' +
   '    <p class="social__text">' + randomElementFromArray(commentsList) + '</p>\n' +
   '</li>');
-
-// ____________________________________________________________________________;
-
-// var socialText = bigPicture.querySelectorAll('.social__text');
-// socialText[0].textContent = randomElementFromArray(commentsList);
-// socialText[1].textContent = randomElementFromArray(commentsList);
-// var socialPicture = bigPicture.querySelectorAll('.social__picture');
-// socialPicture[1].src = 'img/avatar-' + randomInteger(1, 6) + '.svg';
-// socialPicture[2].src = 'img/avatar-' + randomInteger(1, 6) + '.svg';
-
-// _____________________________________________________________________________;
 
 var socialCommentCount = bigPicture.querySelector('.social__comment-count');
 socialCommentCount.classList.add('visually-hidden');
