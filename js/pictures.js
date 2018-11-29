@@ -39,7 +39,7 @@ var makesComment = function () {
   return lineComments;
 };
 
-var creatingСomments = function () {
+var creatingComments = function () {
   var comments = [];
   for (var i = 0; i < randomInteger(1, 6); i++) {
     comments[i] = makesComment();
@@ -53,7 +53,7 @@ var generatesAnArray = function () {
     photos[i] = {
       url: 'photos/' + (i + 1) + '.jpg',
       likes: randomInteger(15, 200),
-      comments: creatingСomments(),
+      comments: creatingComments(),
       description: randomElementFromArray(descriptionList)
     };
   }
