@@ -1,5 +1,4 @@
 'use strict';
-console.log(20);
 var NUMBER_OF_PHOTOS = 25;
 
 var commentsList = [
@@ -77,29 +76,35 @@ for (var i = 0; i < photos.length; i++) {
 }
 pictures.appendChild(fragment);
 
-var bigPicture = document.querySelector('.big-picture');
-bigPicture.classList.remove('hidden');
+var imgUploadOverlay = document.querySelector('.img-upload__overlay');
+var uploadFile = document.querySelector('#upload-file');
+uploadFile.addEventListener('change', function () {
+imgUploadOverlay.classList.remove('hidden');
+});
 
-var firstPhotos = photos[0];
-var bigPictureImg = bigPicture.querySelector('img');
-var likesCount = bigPicture.querySelector('.likes-count');
-var socialCaption = bigPicture.querySelector('.social__caption');
-var commentsCount = bigPicture.querySelector('.comments-count');
-bigPictureImg.src = firstPhotos.url;
-likesCount.textContent = firstPhotos.likes;
-socialCaption.textContent = firstPhotos.description;
-commentsCount.textContent = firstPhotos.comments.length;
+// var bigPicture = document.querySelector('.big-picture');
+// bigPicture.classList.remove('hidden');
 
-var socialComments = bigPicture.querySelector('.social__comments');
-socialComments.insertAdjacentHTML('beforeend', '<li class="social__comment">\n' +
-  '  <img class="social__picture" ' +
-  'src="img/avatar-' + randomInteger(1, 6) + '.svg"\n' +
-  '    alt="Аватар комментатора фотографии"\n' +
-  '    width="35" height="35">\n' +
-  '    <p class="social__text">' + randomElementFromArray(commentsList) + '</p>\n' +
-  '</li>');
+// var firstPhotos = photos[0];
+// var bigPictureImg = bigPicture.querySelector('img');
+// var likesCount = bigPicture.querySelector('.likes-count');
+// var socialCaption = bigPicture.querySelector('.social__caption');
+// var commentsCount = bigPicture.querySelector('.comments-count');
+// bigPictureImg.src = firstPhotos.url;
+// likesCount.textContent = firstPhotos.likes;
+// socialCaption.textContent = firstPhotos.description;
+// commentsCount.textContent = firstPhotos.comments.length;
 
-var socialCommentCount = bigPicture.querySelector('.social__comment-count');
-socialCommentCount.classList.add('visually-hidden');
-var commentsLoader = bigPicture.querySelector('.comments-loader');
-commentsLoader.classList.add('visually-hidden');
+// var socialComments = bigPicture.querySelector('.social__comments');
+// socialComments.insertAdjacentHTML('beforeend', '<li class="social__comment">\n' +
+//   '  <img class="social__picture" ' +
+//   'src="img/avatar-' + randomInteger(1, 6) + '.svg"\n' +
+//   '    alt="Аватар комментатора фотографии"\n' +
+//   '    width="35" height="35">\n' +
+//   '    <p class="social__text">' + randomElementFromArray(commentsList) + '</p>\n' +
+//   '</li>');
+//
+// var socialCommentCount = bigPicture.querySelector('.social__comment-count');
+// socialCommentCount.classList.add('visually-hidden');
+// var commentsLoader = bigPicture.querySelector('.comments-loader');
+// commentsLoader.classList.add('visually-hidden');
