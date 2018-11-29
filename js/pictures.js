@@ -1,4 +1,5 @@
 'use strict';
+console.log(20);
 var NUMBER_OF_PHOTOS = 25;
 
 var commentsList = [
