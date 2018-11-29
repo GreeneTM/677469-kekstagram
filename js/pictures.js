@@ -82,6 +82,9 @@ uploadFile.addEventListener('change', function () {
 imgUploadOverlay.classList.remove('hidden');
 });
 
+var imgUploadCancel = imgUploadOverlay.querySelector('img-upload__cancel');
+imgUploadCancel.addEventListener('click')
+
 // var bigPicture = document.querySelector('.big-picture');
 // bigPicture.classList.remove('hidden');
 
