@@ -93,8 +93,37 @@ document.addEventListener('keydown', function (evt) {
   }
 });
 
-// var bigPicture = document.querySelector('.big-picture');
-// bigPicture.classList.remove('hidden');
+// попытка сделать фильтор
+var effectsList = document.querySelector('.effects__list');
+effectsList.addEventListener('click', function () {
+  var imgUploadPreview = document.querySelector('img');
+  var effectsRadio = document.querySelectorAll('.effects__radio');
+  for (var j = 0; j < effectsRadio.length; j++) {
+    if (effectsRadio[j].checked) {
+      var appliedClass = 'effects__preview--' + effectsRadio[j].defaultValue;
+      imgUploadPreview.classList.add(appliedClass);
+    }
+  }
+});
+
+var picture = document.querySelectorAll('.picture');
+var bigPicture = document.querySelector('.big-picture');
+for (var i = 0; i < picture.length; i++) {
+  picture[i].addEventListener('click', function () {
+    bigPicture.classList.remove('hidden');
+});
+}
+
+var bigPictureCancel = document.querySelector('.big-picture__cancel');
+bigPictureCancel.addEventListener('click', function () {
+  bigPicture.classList.add('hidden');
+});
+
+document.addEventListener('keydown', function (evt) {
+  if (evt.keyCode === 27) {
+    bigPicture.classList.add('hidden');
+  }
+});
 
 // var firstPhotos = photos[0];
 // var bigPictureImg = bigPicture.querySelector('img');
