@@ -79,11 +79,19 @@ pictures.appendChild(fragment);
 var imgUploadOverlay = document.querySelector('.img-upload__overlay');
 var uploadFile = document.querySelector('#upload-file');
 uploadFile.addEventListener('change', function () {
-imgUploadOverlay.classList.remove('hidden');
+  imgUploadOverlay.classList.remove('hidden');
 });
 
-var imgUploadCancel = imgUploadOverlay.querySelector('img-upload__cancel');
-imgUploadCancel.addEventListener('click')
+var imgUploadCancel = imgUploadOverlay.querySelector('.img-upload__cancel');
+imgUploadCancel.addEventListener('click', function () {
+  imgUploadOverlay.classList.add('hidden');
+});
+
+document.addEventListener('keydown', function (evt) {
+  if (evt.keyCode === 27) {
+    imgUploadOverlay.classList.add('hidden');
+  }
+});
 
 // var bigPicture = document.querySelector('.big-picture');
 // bigPicture.classList.remove('hidden');
