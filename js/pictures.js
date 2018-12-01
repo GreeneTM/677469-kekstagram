@@ -106,14 +106,17 @@ effectsList.addEventListener('click', function () {
   }
 });
 
-var picture = document.querySelectorAll('.picture');
-var bigPicture = document.querySelector('.big-picture');
-for (var i = 0; i < picture.length; i++) {
-  picture[i].addEventListener('click', function () {
-    bigPicture.classList.remove('hidden');
-});
-}
+(function () {
+  var picture = document.querySelectorAll('.picture');
+  var bigPicture = document.querySelector('.big-picture');
+  for (var index = 0; index < picture.length; index++) {
+    picture[index].addEventListener('click', function () {
+      bigPicture.classList.remove('hidden');
+    });
+  }
+})();
 
+var bigPicture = document.querySelector('.big-picture');
 var bigPictureCancel = document.querySelector('.big-picture__cancel');
 bigPictureCancel.addEventListener('click', function () {
   bigPicture.classList.add('hidden');
