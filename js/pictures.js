@@ -93,18 +93,19 @@ document.addEventListener('keydown', function (evt) {
   }
 });
 
-// попытка сделать фильтор
-var effectsList = document.querySelector('.effects__list');
-effectsList.addEventListener('click', function () {
-  var imgUploadPreview = document.querySelector('img');
-  var effectsRadio = document.querySelectorAll('.effects__radio');
-  for (var j = 0; j < effectsRadio.length; j++) {
-    if (effectsRadio[j].checked) {
-      var appliedClass = 'effects__preview--' + effectsRadio[j].defaultValue;
+// Смена фильтра фильтров
+var imgUploadPreview = document.querySelector('img');
+var effectsItem = document.querySelectorAll('.effects__item');
+for (var j = 0; j < effectsItem.length; j++) {
+  effectsItem[j].addEventListener('click', function (evt) {
+    var appliedClass = 'effects__preview--' + evt.target.value;
+    if (imgUploadPreview.className) {
+      var previousClass = imgUploadPreview.className;
+      imgUploadPreview.classList.remove(previousClass);
       imgUploadPreview.classList.add(appliedClass);
-    }
-  }
-});
+    } imgUploadPreview.classList.add(appliedClass);
+  });
+}
 
 (function () {
   var picture = document.querySelectorAll('.picture');
