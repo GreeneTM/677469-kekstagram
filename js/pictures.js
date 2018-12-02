@@ -93,7 +93,7 @@ document.addEventListener('keydown', function (evt) {
   }
 });
 
-// Смена фильтра фильтров
+// Смена фильтров
 var imgUploadPreview = document.querySelector('img');
 var effectsItem = document.querySelectorAll('.effects__item');
 for (var j = 0; j < effectsItem.length; j++) {
