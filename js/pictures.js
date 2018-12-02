@@ -65,6 +65,11 @@ var photos = generatesAnArray();
 var pictures = document.querySelector('.pictures');
 var templatePictures = document.querySelector('#picture').content.querySelector('a');
 var fragment = document.createDocumentFragment();
+var bigPicture = document.querySelector('.big-picture');
+var bigPictureImg = bigPicture.querySelector('img');
+var likesCount = bigPicture.querySelector('.likes-count');
+var socialCaption = bigPicture.querySelector('.social__caption');
+var commentsCount = bigPicture.querySelector('.comments-count');
 
 for (var i = 0; i < photos.length; i++) {
   var indexpPhotos = photos[i];
@@ -72,6 +77,16 @@ for (var i = 0; i < photos.length; i++) {
   element.querySelector('img').src = indexpPhotos.url;
   element.querySelector('.picture__likes').textContent = indexpPhotos.likes;
   element.querySelector('.picture__comments').textContent = indexpPhotos.comments.length;
+
+  element.addEventListener('click', function (evt) {
+    bigPictureImg.src = evt.target.src;
+    socialCaption.textContent = randomElementFromArray(descriptionList);
+    commentsCount.textContent = evt.srcElement.nextElementSibling.children[0].textContent;
+    likesCount.textContent = evt.srcElement.nextElementSibling.children[1].textContent;
+    var socialComments = bigPicture.querySelector('.social__comments');
+    socialComments.insertAdjacentHTML('beforeend', '<li class="social__comment">\n <img class="social__picture" src="img/avatar-' + randomInteger(1, 6) + '.svg"\n alt="Аватар комментатора фотографии"\n width="35" height="35">\n <p class="social__text">' + randomElementFromArray(commentsList) + '</p>\n </li>');
+    bigPicture.classList.remove('hidden');
+  });
   fragment.appendChild(element);
 }
 pictures.appendChild(fragment);
@@ -107,17 +122,6 @@ for (var j = 0; j < effectsItem.length; j++) {
   });
 }
 
-(function () {
-  var picture = document.querySelectorAll('.picture');
-  var bigPicture = document.querySelector('.big-picture');
-  for (var index = 0; index < picture.length; index++) {
-    picture[index].addEventListener('click', function () {
-      bigPicture.classList.remove('hidden');
-    });
-  }
-})();
-
-var bigPicture = document.querySelector('.big-picture');
 var bigPictureCancel = document.querySelector('.big-picture__cancel');
 bigPictureCancel.addEventListener('click', function () {
   bigPicture.classList.add('hidden');
