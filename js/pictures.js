@@ -70,6 +70,7 @@ var bigPictureImg = bigPicture.querySelector('img');
 var likesCount = bigPicture.querySelector('.likes-count');
 var socialCaption = bigPicture.querySelector('.social__caption');
 var commentsCount = bigPicture.querySelector('.comments-count');
+var socialComments = bigPicture.querySelector('.social__comments');
 
 for (var i = 0; i < photos.length; i++) {
   var indexpPhotos = photos[i];
@@ -83,7 +84,6 @@ for (var i = 0; i < photos.length; i++) {
     socialCaption.textContent = randomElementFromArray(descriptionList);
     commentsCount.textContent = evt.srcElement.nextElementSibling.children[0].textContent;
     likesCount.textContent = evt.srcElement.nextElementSibling.children[1].textContent;
-    var socialComments = bigPicture.querySelector('.social__comments');
     socialComments.insertAdjacentHTML('beforeend', '<li class="social__comment">\n <img class="social__picture" src="img/avatar-' + randomInteger(1, 6) + '.svg"\n alt="Аватар комментатора фотографии"\n width="35" height="35">\n <p class="social__text">' + randomElementFromArray(commentsList) + '</p>\n </li>');
     bigPicture.classList.remove('hidden');
   });
