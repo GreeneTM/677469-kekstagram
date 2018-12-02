@@ -133,26 +133,42 @@ document.addEventListener('keydown', function (evt) {
   }
 });
 
-// var firstPhotos = photos[0];
-// var bigPictureImg = bigPicture.querySelector('img');
-// var likesCount = bigPicture.querySelector('.likes-count');
-// var socialCaption = bigPicture.querySelector('.social__caption');
-// var commentsCount = bigPicture.querySelector('.comments-count');
-// bigPictureImg.src = firstPhotos.url;
-// likesCount.textContent = firstPhotos.likes;
-// socialCaption.textContent = firstPhotos.description;
-// commentsCount.textContent = firstPhotos.comments.length;
+var pinHandle = document.querySelector('.effect-level__pin');
 
-// var socialComments = bigPicture.querySelector('.social__comments');
-// socialComments.insertAdjacentHTML('beforeend', '<li class="social__comment">\n' +
-//   '  <img class="social__picture" ' +
-//   'src="img/avatar-' + randomInteger(1, 6) + '.svg"\n' +
-//   '    alt="Аватар комментатора фотографии"\n' +
-//   '    width="35" height="35">\n' +
-//   '    <p class="social__text">' + randomElementFromArray(commentsList) + '</p>\n' +
-//   '</li>');
-//
-// var socialCommentCount = bigPicture.querySelector('.social__comment-count');
-// socialCommentCount.classList.add('visually-hidden');
-// var commentsLoader = bigPicture.querySelector('.comments-loader');
-// commentsLoader.classList.add('visually-hidden');
+pinHandle.addEventListener('mousedown', function (evt) {
+  evt.preventDefault();
+  var startCoords = {
+    x: evt.clientX,
+    y: evt.clientY
+  };
+
+  var onMouseMove = function (moveEvt) {
+    moveEvt.preventDefault();
+
+    var shift = {
+      x: startCoords.x - moveEvt.clientX
+    };
+
+    startCoords = {
+      x: moveEvt.clientX
+    };
+
+    pinHandle.style.left = (pinHandle.offsetLeft - shift.x) + 'px';
+    if ((pinHandle.offsetLeft - shift.x) < 0) {
+      pinHandle.style.left = 0 + 'px';
+    } else if ((pinHandle.offsetLeft - shift.x) > 450) {
+      pinHandle.style.left = 450 + 'px';
+    }
+  };
+
+  var onMouseUp = function (upEvt) {
+    upEvt.preventDefault();
+
+    document.removeEventListener('mousemove', onMouseMove);
+    document.removeEventListener('mouseup', onMouseUp);
+  };
+
+  document.addEventListener('mousemove', onMouseMove);
+  document.addEventListener('mouseup', onMouseUp);
+
+});
