@@ -133,6 +133,7 @@ document.addEventListener('keydown', function (evt) {
   }
 });
 
+var effectLevelValue = document.querySelector('.effect-level__value');
 var pinHandle = document.querySelector('.effect-level__pin');
 
 pinHandle.addEventListener('mousedown', function (evt) {
@@ -154,11 +155,23 @@ pinHandle.addEventListener('mousedown', function (evt) {
     };
 
     pinHandle.style.left = (pinHandle.offsetLeft - shift.x) + 'px';
+    effectLevelValue.setAttribute('value', (pinHandle.offsetLeft - shift.x));
+
     if ((pinHandle.offsetLeft - shift.x) < 0) {
       pinHandle.style.left = 0 + 'px';
+      effectLevelValue.setAttribute('value', '0');
     } else if ((pinHandle.offsetLeft - shift.x) > 450) {
       pinHandle.style.left = 450 + 'px';
+      effectLevelValue.setAttribute('value', '450');
     }
+    var effectValue = function () {
+      var filterOptions = effectLevelValue.getAttribute('value');
+      var countingValues = 1 * filterOptions / 450;
+      var selectFilter = bigPictureImg.className;
+      if (selectFilter === 'effects__preview--chrome') {
+        bigPictureImg.style.filter = 'grayscale(' + countingValues + ')';
+      }
+    };
   };
 
   var onMouseUp = function (upEvt) {
