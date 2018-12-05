@@ -109,16 +109,17 @@ document.addEventListener('keydown', function (evt) {
 });
 
 // Смена фильтров
-var imgUploadPreview = document.querySelector('img');
+var imgUploadPreview = document.querySelector('.img-upload__preview');
+var imgEditing = imgUploadPreview.querySelector('img');
 var effectsItem = document.querySelectorAll('.effects__item');
 for (var j = 0; j < effectsItem.length; j++) {
   effectsItem[j].addEventListener('click', function (evt) {
     var appliedClass = 'effects__preview--' + evt.target.value;
-    if (imgUploadPreview.className) {
-      var previousClass = imgUploadPreview.className;
-      imgUploadPreview.classList.remove(previousClass);
-      imgUploadPreview.classList.add(appliedClass);
-    } imgUploadPreview.classList.add(appliedClass);
+    if (imgEditing.className) {
+      var previousClass = imgEditing.className;
+      imgEditing.classList.remove(previousClass);
+      imgEditing.classList.add(appliedClass);
+    } imgEditing.classList.add(appliedClass);
   });
 }
 
@@ -164,14 +165,6 @@ pinHandle.addEventListener('mousedown', function (evt) {
       pinHandle.style.left = 450 + 'px';
       effectLevelValue.setAttribute('value', '450');
     }
-    var effectValue = function () {
-      var filterOptions = effectLevelValue.getAttribute('value');
-      var countingValues = 1 * filterOptions / 450;
-      var selectFilter = bigPictureImg.className;
-      if (selectFilter === 'effects__preview--chrome') {
-        bigPictureImg.style.filter = 'grayscale(' + countingValues + ')';
-      }
-    };
   };
 
   var onMouseUp = function (upEvt) {
@@ -185,3 +178,38 @@ pinHandle.addEventListener('mousedown', function (evt) {
   document.addEventListener('mouseup', onMouseUp);
 
 });
+
+// масштаб
+var btnScaleControlSmaller = document.querySelector('.scale__control--smaller'); // кнопка уменьшить
+var btnScaleControlBigger = document.querySelector('.scale__control--bigger'); // кнопка увеличить
+var inputScaleControlValue = document.querySelector('.scale__control--value'); // значение
+inputScaleControlValue.value = 100 + '%';
+
+// функция масштабирует элемент
+var onScaleControlValueChange = function (value) {
+  imgUploadPreview.style.transform = 'scale(' + value.slice(0, -1) / 100 + ')';
+};
+
+// Функция уменьшения масштаба фото
+var onBtnScaleControlSmallerClick = function () {
+  if (inputScaleControlValue.value.slice(0, -1) > 50) {
+    inputScaleControlValue.value = inputScaleControlValue.value.slice(0, -1) - 25 + '%';
+  } else {
+    inputScaleControlValue.value = 25 + '%';
+  }
+  onScaleControlValueChange(inputScaleControlValue.value);
+};
+
+// Функция увеличение масштаба фото
+var onBtnScaleControlBiggerClick = function () {
+  if (inputScaleControlValue.value.slice(0, -1) < 76) {
+    inputScaleControlValue.value = +inputScaleControlValue.value.slice(0, -1) + 25 + '%';
+  } else {
+    inputScaleControlValue.value = 100 + '%';
+  }
+  onScaleControlValueChange(inputScaleControlValue.value);
+};
+
+// обработка события
+btnScaleControlSmaller.addEventListener('click', onBtnScaleControlSmallerClick);
+btnScaleControlBigger.addEventListener('click', onBtnScaleControlBiggerClick);
