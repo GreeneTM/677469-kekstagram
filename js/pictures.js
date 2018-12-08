@@ -215,11 +215,6 @@ btnScaleControlBigger.addEventListener('click', onBtnScaleControlBiggerClick);
 // Хэш-теги
 var textHashtags = document.querySelector('.text__hashtags');
 
-// textHashtags.pattern = '^#[\\w-]+(?:\\s+#[\\w-]+)*$ ';\<#([^\S]+.)\>
-// textHashtags.pattern = '^ (# [a-z \\ d -] + \\ s?) + $';
-// textHashtags.target.value
-// # = Номер в Юникоде U+0023
-
 // Валидация формы #
 textHashtags.addEventListener('input', function (evt) {
   var target = evt.target.value.trim();
@@ -242,11 +237,6 @@ textHashtags.addEventListener('input', function (evt) {
     } else {
       textHashtags.setCustomValidity('');
     }
-
-    console.log('arryTarget', arryTarget);
-    console.log('fromLetter', fromLetter);
-    console.log(repeatSearch(arryTarget));
-    debugger;
   }
 });
 
@@ -264,3 +254,9 @@ var repeatSearch = function (arryTarget) {
   return false;
 };
 
+// Отмена закрытие формы при фокусе
+textHashtags.addEventListener('keydown', function (evt) {
+  if (evt.keyCode === ESC_KEYCODE) {
+    evt.stopPropagation();
+  }
+});
