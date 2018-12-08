@@ -222,11 +222,11 @@ var textHashtags = document.querySelector('.text__hashtags');
 
 // Валидация формы #
 textHashtags.addEventListener('input', function (evt) {
-  var target = evt.target.value;
+  var target = evt.target.value.trim();
   var arryTarget = target.split(' ');
   for (var i = 0; i < arryTarget.length; i++) {
     var fromTarget = arryTarget[i];
-    var fromLetter = fromTarget.split('', 21);
+    var fromLetter = fromTarget.split('');
     if (fromLetter[0] !== '#') {
       textHashtags.setCustomValidity('хэш-тег должен начинается с символа \'#\' (решётка)');
     } else if (fromLetter.length < 2) {
@@ -237,15 +237,20 @@ textHashtags.addEventListener('input', function (evt) {
       textHashtags.setCustomValidity('нельзя указать больше пяти хэш-тегов');
     } else if (repeatSearch(arryTarget)) {
       textHashtags.setCustomValidity('один и тот же хэш-тег нельзя использовать дважды');
-    } else {textHashtags.setCustomValidity('');
+    } else if (arryTarget[i].indexOf('#', 1) !== -1) {
+      textHashtags.setCustomValidity('хэш-теги должны разделятся пробелом');
+    } else {
+      textHashtags.setCustomValidity('');
     }
+
+    console.log('arryTarget', arryTarget);
+    console.log('fromLetter', fromLetter);
+    console.log(repeatSearch(arryTarget));
+    debugger;
   }
-  console.log('arryTarget', arryTarget);
-  console.log('fromLetter', fromLetter);
-  console.log(repeatSearch(arryTarget));
-  debugger;
 });
 
+// проверка на повторения #
 var repeatSearch = function (arryTarget) {
   for (var i = 0; i < arryTarget.length; i++) {
     var element = arryTarget[i].toLowerCase();
@@ -258,3 +263,4 @@ var repeatSearch = function (arryTarget) {
   }
   return false;
 };
+
