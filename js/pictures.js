@@ -212,4 +212,49 @@ var onBtnScaleControlBiggerClick = function () {
 btnScaleControlSmaller.addEventListener('click', onBtnScaleControlSmallerClick);
 btnScaleControlBigger.addEventListener('click', onBtnScaleControlBiggerClick);
 
+// Хэш-теги
+var textHashtags = document.querySelector('.text__hashtags');
 
+// textHashtags.pattern = '^#[\\w-]+(?:\\s+#[\\w-]+)*$ ';\<#([^\S]+.)\>
+// textHashtags.pattern = '^ (# [a-z \\ d -] + \\ s?) + $';
+// textHashtags.target.value
+// # = Номер в Юникоде U+0023
+
+// Валидация формы #
+textHashtags.addEventListener('input', function (evt) {
+  var target = evt.target.value;
+  var arryTarget = target.split(' ');
+  for (var i = 0; i < arryTarget.length; i++) {
+    var fromTarget = arryTarget[i];
+    var fromLetter = fromTarget.split('', 21);
+    if (fromLetter[0] !== '#') {
+      textHashtags.setCustomValidity('хэш-тег должен начинается с символа \'#\' (решётка)');
+    } else if (fromLetter.length < 2) {
+      textHashtags.setCustomValidity('хэш-тег не может состоять только из одной решётки');
+    } else if (arryTarget[i].length > 20) {
+      textHashtags.setCustomValidity('максимальная длина одного хэштега не должна превышать 20 символов, включая решётку');
+    } else if (arryTarget.length > 5) {
+      textHashtags.setCustomValidity('нельзя указать больше пяти хэш-тегов');
+    } else if (repeatSearch(arryTarget)) {
+      textHashtags.setCustomValidity('один и тот же хэш-тег нельзя использовать дважды');
+    } else {textHashtags.setCustomValidity('');
+    }
+  }
+  console.log('arryTarget', arryTarget);
+  console.log('fromLetter', fromLetter);
+  console.log(repeatSearch(arryTarget));
+  debugger;
+});
+
+var repeatSearch = function (arryTarget) {
+  for (var i = 0; i < arryTarget.length; i++) {
+    var element = arryTarget[i].toLowerCase();
+    console.log('element', element);
+    for (var j = 0; j < arryTarget.length; j++) {
+      if (i !== j && element === arryTarget[j].toLowerCase()) {
+        return true;
+      }
+    }
+  }
+  return false;
+};
