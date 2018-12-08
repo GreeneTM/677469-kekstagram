@@ -219,20 +219,20 @@ var textHashtags = document.querySelector('.text__hashtags');
 textHashtags.addEventListener('input', function (evt) {
   var target = evt.target.value.trim();
   var arryTarget = target.split(' ');
-  for (var i = 0; i < arryTarget.length; i++) {
-    var fromTarget = arryTarget[i];
+  for (var k = 0; k < arryTarget.length; k++) {
+    var fromTarget = arryTarget[k];
     var fromLetter = fromTarget.split('');
     if (fromLetter[0] !== '#') {
       textHashtags.setCustomValidity('хэш-тег должен начинается с символа \'#\' (решётка)');
     } else if (fromLetter.length < 2) {
       textHashtags.setCustomValidity('хэш-тег не может состоять только из одной решётки');
-    } else if (arryTarget[i].length > 20) {
+    } else if (arryTarget[k].length > 20) {
       textHashtags.setCustomValidity('максимальная длина одного хэштега не должна превышать 20 символов, включая решётку');
     } else if (arryTarget.length > 5) {
       textHashtags.setCustomValidity('нельзя указать больше пяти хэш-тегов');
     } else if (repeatSearch(arryTarget)) {
       textHashtags.setCustomValidity('один и тот же хэш-тег нельзя использовать дважды');
-    } else if (arryTarget[i].indexOf('#', 1) !== -1) {
+    } else if (arryTarget[k].indexOf('#', 1) !== -1) {
       textHashtags.setCustomValidity('хэш-теги должны разделятся пробелом');
     } else {
       textHashtags.setCustomValidity('');
@@ -242,11 +242,10 @@ textHashtags.addEventListener('input', function (evt) {
 
 // проверка на повторения #
 var repeatSearch = function (arryTarget) {
-  for (var i = 0; i < arryTarget.length; i++) {
-    var element = arryTarget[i].toLowerCase();
-    console.log('element', element);
-    for (var j = 0; j < arryTarget.length; j++) {
-      if (i !== j && element === arryTarget[j].toLowerCase()) {
+  for (var q = 0; q < arryTarget.length; q++) {
+    var elementToCheck = arryTarget[q].toLowerCase();
+    for (var e = 0; e < arryTarget.length; e++) {
+      if (q !== e && elementToCheck === arryTarget[e].toLowerCase()) {
         return true;
       }
     }
