@@ -214,6 +214,9 @@ btnScaleControlBigger.addEventListener('click', onBtnScaleControlBiggerClick);
 
 // Хэш-теги
 var textHashtags = document.querySelector('.text__hashtags');
+var MIN_HASHTAG_LENGTH = 2;
+var MAX_HASHTAG_LENGTH = 20;
+var MAX_HASHTAG_COUNT = 5;
 
 // Валидация формы #
 textHashtags.addEventListener('input', function (evt) {
@@ -224,11 +227,11 @@ textHashtags.addEventListener('input', function (evt) {
     var fromLetter = fromTarget.split('');
     if (fromLetter[0] !== '#') {
       textHashtags.setCustomValidity('хэш-тег должен начинается с символа \'#\' (решётка)');
-    } else if (fromLetter.length < 2) {
+    } else if (fromLetter.length < MIN_HASHTAG_LENGTH) {
       textHashtags.setCustomValidity('хэш-тег не может состоять только из одной решётки');
-    } else if (arryTarget[k].length > 20) {
+    } else if (arryTarget[k].length > MAX_HASHTAG_LENGTH) {
       textHashtags.setCustomValidity('максимальная длина одного хэштега не должна превышать 20 символов, включая решётку');
-    } else if (arryTarget.length > 5) {
+    } else if (arryTarget.length > MAX_HASHTAG_COUNT) {
       textHashtags.setCustomValidity('нельзя указать больше пяти хэш-тегов');
     } else if (repeatSearch(arryTarget)) {
       textHashtags.setCustomValidity('один и тот же хэш-тег нельзя использовать дважды');
