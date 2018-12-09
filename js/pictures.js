@@ -168,6 +168,8 @@ var handleMouseUpLevelPin = function () {
   var offsetLeft = levelPin.offsetLeft;
   var fullWidthLevelLine = levelLine.clientWidth;
   var effectValue = Math.round((offsetLeft * 100) / fullWidthLevelLine);
+  var effectLevelDepth = document.querySelector('.effect-level__depth');
+  effectLevelDepth.style.width = effectValue + '%';
   onEffectSliderPinUp(effectValue);
 };
 
