@@ -129,6 +129,36 @@ for (var j = 0; j < effectsItems.length; j++) {
 var levelPin = document.querySelector('.effect-level__pin');
 var levelLine = document.querySelector('.effect-level__line');
 
+// Drag'n'Drop
+levelPin.addEventListener('mousedown', function (evt) {
+  evt.preventDefault();
+
+  // находим начальные координаты
+  var startCoords = evt.clientX;
+
+  // обрабочик движение мыши
+  var onMouseMove = function (moveEvt) {
+    moveEvt.preventDefault();
+    console.log('moveEvt', moveEvt);
+    var shift = startCoords - moveEvt.clientX;
+    console.log('shift', shift);
+    startCoords = moveEvt.clientX;
+    console.log('startCoords', startCoords);
+    levelPin.style.left = (levelPin.offsetLeft - shift) + 'px';
+  };
+
+  // обробочик отпускание кнопки мыши
+  var onMouseUp = function (upEvt) {
+    upEvt.preventDefault();
+    document.removeEventListener('mousemove', onMouseMove);
+    document.removeEventListener('mouseup', onMouseUp);
+  };
+  
+  // вызываем наших обробочиков
+  document.addEventListener('mousemove', onMouseMove);
+  document.addEventListener('mouseup', onMouseUp);
+});
+
 // функция value
 var handleMouseUpLevelPin = function () {
   var offsetLeft = levelPin.offsetLeft;
