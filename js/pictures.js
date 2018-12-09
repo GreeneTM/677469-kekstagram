@@ -139,21 +139,25 @@ levelPin.addEventListener('mousedown', function (evt) {
   // обрабочик движение мыши
   var onMouseMove = function (moveEvt) {
     moveEvt.preventDefault();
-    console.log('moveEvt', moveEvt);
     var shift = startCoords - moveEvt.clientX;
-    console.log('shift', shift);
     startCoords = moveEvt.clientX;
-    console.log('startCoords', startCoords);
     levelPin.style.left = (levelPin.offsetLeft - shift) + 'px';
+    // остановим его в диапозоне 0-453
+    if ((levelPin.offsetLeft - shift) < 0) {
+      levelPin.style.left = 0 + 'px';
+    } else if ((levelPin.offsetLeft - shift) > levelLine.clientWidth) {
+      levelPin.style.left = levelLine.clientWidth + 'px';
+    }
   };
 
   // обробочик отпускание кнопки мыши
   var onMouseUp = function (upEvt) {
     upEvt.preventDefault();
+    handleMouseUpLevelPin();
     document.removeEventListener('mousemove', onMouseMove);
     document.removeEventListener('mouseup', onMouseUp);
   };
-  
+
   // вызываем наших обробочиков
   document.addEventListener('mousemove', onMouseMove);
   document.addEventListener('mouseup', onMouseUp);
@@ -166,8 +170,6 @@ var handleMouseUpLevelPin = function () {
   var effectValue = Math.round((offsetLeft * 100) / fullWidthLevelLine);
   onEffectSliderPinUp(effectValue);
 };
-
-levelPin.addEventListener('mouseup', handleMouseUpLevelPin);
 
 // классы & эффекты
 var onEffectSliderPinUp = function (percent) {
