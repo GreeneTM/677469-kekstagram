@@ -221,21 +221,21 @@ var MAX_HASHTAG_COUNT = 5;
 // Валидация формы #
 textHashtags.addEventListener('input', function (evt) {
   var target = evt.target.value.trim();
-  var arryTarget = target.split(' ');
-  for (var k = 0; k < arryTarget.length; k++) {
-    var fromTarget = arryTarget[k];
-    var fromLetter = fromTarget.split('');
-    if (fromLetter[0] !== '#') {
+  var arryTargets = target.split(' ');
+  for (var k = 0; k < arryTargets.length; k++) {
+    var item = arryTargets[k];
+    var fromLetters = item.split('');
+    if (fromLetters[0] !== '#') {
       textHashtags.setCustomValidity('хэш-тег должен начинается с символа \'#\' (решётка)');
-    } else if (fromLetter.length < MIN_HASHTAG_LENGTH) {
+    } else if (fromLetters.length < MIN_HASHTAG_LENGTH) {
       textHashtags.setCustomValidity('хэш-тег не может состоять только из одной решётки');
-    } else if (arryTarget[k].length > MAX_HASHTAG_LENGTH) {
+    } else if (arryTargets[k].length > MAX_HASHTAG_LENGTH) {
       textHashtags.setCustomValidity('максимальная длина одного хэштега не должна превышать 20 символов, включая решётку');
-    } else if (arryTarget.length > MAX_HASHTAG_COUNT) {
+    } else if (arryTargets.length > MAX_HASHTAG_COUNT) {
       textHashtags.setCustomValidity('нельзя указать больше пяти хэш-тегов');
-    } else if (repeatSearch(arryTarget)) {
+    } else if (repeatSearch(arryTargets)) {
       textHashtags.setCustomValidity('один и тот же хэш-тег нельзя использовать дважды');
-    } else if (arryTarget[k].indexOf('#', 1) !== -1) {
+    } else if (arryTargets[k].indexOf('#', 1) !== -1) {
       textHashtags.setCustomValidity('хэш-теги должны разделятся пробелом');
     } else {
       textHashtags.setCustomValidity('');
@@ -244,11 +244,11 @@ textHashtags.addEventListener('input', function (evt) {
 });
 
 // проверка на повторения #
-var repeatSearch = function (arryTarget) {
-  for (var q = 0; q < arryTarget.length; q++) {
-    var elementToCheck = arryTarget[q].toLowerCase();
-    for (var e = 0; e < arryTarget.length; e++) {
-      if (q !== e && elementToCheck === arryTarget[e].toLowerCase()) {
+var repeatSearch = function (array) {
+  for (var q = 0; q < array.length; q++) {
+    var elementToCheck = array[q].toLowerCase();
+    for (var e = 0; e < array.length; e++) {
+      if (q !== e && elementToCheck === array[e].toLowerCase()) {
         return true;
       }
     }
