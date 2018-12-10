@@ -140,12 +140,11 @@ levelPin.addEventListener('mousedown', function (evt) {
   var onMouseMove = function (moveEvt) {
     moveEvt.preventDefault();
     // движения полоски за ползунком
-    var effectLevelDepth = document.querySelector('.effect-level__depth');
     var offsetLeft = levelPin.offsetLeft;
     var fullWidthLevelLine = levelLine.clientWidth;
     var effectValue = Math.round((offsetLeft * 100) / fullWidthLevelLine);
     // основные вычесления
-    effectLevelDepth.style.width = effectValue + '%';
+    document.querySelector('.effect-level__depth').style.width = effectValue + '%';
     var shift = startCoords - moveEvt.clientX;
     startCoords = moveEvt.clientX;
     levelPin.style.left = (levelPin.offsetLeft - shift) + 'px';
