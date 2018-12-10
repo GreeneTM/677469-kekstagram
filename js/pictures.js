@@ -128,6 +128,7 @@ for (var j = 0; j < effectsItems.length; j++) {
 
 var levelPin = document.querySelector('.effect-level__pin');
 var levelLine = document.querySelector('.effect-level__line');
+var effectLevelDepth = document.querySelector('.effect-level__depth');
 
 // Drag'n'Drop
 levelPin.addEventListener('mousedown', function (evt) {
@@ -144,7 +145,7 @@ levelPin.addEventListener('mousedown', function (evt) {
     var fullWidthLevelLine = levelLine.clientWidth;
     var effectValue = Math.round((offsetLeft * 100) / fullWidthLevelLine);
     // основные вычесления
-    document.querySelector('.effect-level__depth').style.width = effectValue + '%';
+    effectLevelDepth.style.width = effectValue + '%';
     var shift = startCoords - moveEvt.clientX;
     startCoords = moveEvt.clientX;
     levelPin.style.left = (levelPin.offsetLeft - shift) + 'px';
