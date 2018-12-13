@@ -1,32 +1,32 @@
 'use strict';
 (function () {
   // Хэш-теги
-  window.textHashtags = document.querySelector('.text__hashtags');
+  var textHashtags = document.querySelector('.text__hashtags');
   var MIN_HASHTAG_LENGTH = 2;
   var MAX_HASHTAG_LENGTH = 20;
   var MAX_HASHTAG_COUNT = 5;
 
   // Валидация формы #
-  window.textHashtags.addEventListener('input', function (evt) {
+  textHashtags.addEventListener('input', function (evt) {
     var target = evt.target.value.trim();
     var arryTargets = target.split(' ');
     for (var k = 0; k < arryTargets.length; k++) {
       var item = arryTargets[k];
       var fromLetters = item.split('');
       if (fromLetters[0] !== '#') {
-        window.textHashtags.setCustomValidity('хэш-тег должен начинается с символа \'#\' (решётка)');
+        textHashtags.setCustomValidity('хэш-тег должен начинается с символа \'#\' (решётка)');
       } else if (fromLetters.length < MIN_HASHTAG_LENGTH) {
-        window.textHashtags.setCustomValidity('хэш-тег не может состоять только из одной решётки');
+        textHashtags.setCustomValidity('хэш-тег не может состоять только из одной решётки');
       } else if (arryTargets[k].length > MAX_HASHTAG_LENGTH) {
-        window.textHashtags.setCustomValidity('максимальная длина одного хэштега не должна превышать 20 символов, включая решётку');
+        textHashtags.setCustomValidity('максимальная длина одного хэштега не должна превышать 20 символов, включая решётку');
       } else if (arryTargets.length > MAX_HASHTAG_COUNT) {
-        window.textHashtags.setCustomValidity('нельзя указать больше пяти хэш-тегов');
+        textHashtags.setCustomValidity('нельзя указать больше пяти хэш-тегов');
       } else if (repeatSearch(arryTargets)) {
-        window.textHashtags.setCustomValidity('один и тот же хэш-тег нельзя использовать дважды');
+        textHashtags.setCustomValidity('один и тот же хэш-тег нельзя использовать дважды');
       } else if (arryTargets[k].indexOf('#', 1) !== -1) {
-        window.textHashtags.setCustomValidity('хэш-теги должны разделятся пробелом');
+        textHashtags.setCustomValidity('хэш-теги должны разделятся пробелом');
       } else {
-        window.textHashtags.setCustomValidity('');
+        textHashtags.setCustomValidity('');
       }
     }
   });
@@ -43,4 +43,11 @@
     }
     return false;
   };
+
+  // Отмена закрытие формы при фокусе
+  textHashtags.addEventListener('keydown', function (evt) {
+    if (evt.keyCode === window.constants.ESC_KEYCODE) {
+      evt.stopPropagation();
+    }
+  });
 })();

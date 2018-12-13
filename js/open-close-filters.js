@@ -12,20 +12,8 @@
   });
 
   document.addEventListener('keydown', function (evt) {
-    if (evt.keyCode === window.ESC_KEYCODE) {
+    if (evt.keyCode === window.constants.ESC_KEYCODE) {
       imgUploadOverlay.classList.add('hidden');
-    }
-  });
-
-  // close BigPicture
-  var bigPictureCancel = document.querySelector('.big-picture__cancel');
-  bigPictureCancel.addEventListener('click', function () {
-    window.bigPicture.classList.add('hidden');
-  });
-
-  document.addEventListener('keydown', function (evt) {
-    if (evt.keyCode === window.ESC_KEYCODE) {
-      window.bigPicture.classList.add('hidden');
     }
   });
 })();
