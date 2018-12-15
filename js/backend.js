@@ -1,15 +1,19 @@
 'use strict';
 (function () {
   var xhr = new XMLHttpRequest();
-  console.log('xhr.readyState', xhr.readyState);
-  xhr.responseType = 'json';
+  var URL = ' https://js.dump.academy/kekstagram/data';
 
-  xhr.addEventListener('load', function (evt) {
-    console.log(evt.target === xhr);
-    console.log(xhr.response);
-  });
-  xhr.open('GET', ' https://js.dump.academy/kekstagram/data');
-  console.log('xhr.readyState', xhr.readyState);
 
-  xhr.send();
+  var setup = function (xhr, onLoad, onError) {
+    xhr.responseType = 'json';
+    xhr.addEventListener('load', function () {
+      if (xhr.status === 200) {
+        onLoad(xhr.response);
+      } else {
+        onError('ошибка загрузки');
+      }
+    });
+    xhr.open('GET', URL);
+    xhr.send();
+  };
 })();
