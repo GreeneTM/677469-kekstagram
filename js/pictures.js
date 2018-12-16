@@ -42,6 +42,14 @@
     }
     pictures.appendChild(fragment);
   });
+  
+  // var errorModalTemplate = document.querySelector('#error').content.querySelector('.error');
+  // var successModalTemplate = document.querySelector('#success').content.querySelector('.success');
+  // var mainElement = document.querySelector('main');
+  // var errorButton = document.querySelector('.error__button');
+  // var successButton = document.querySelector('.success__button');
+  // var uploadCancel = document.querySelector('#upload-cancel');
+
   window.backend.download(renderPhotos);
   window.bigPicture = bigPicture;
 })();

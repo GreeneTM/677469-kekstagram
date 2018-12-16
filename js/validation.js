@@ -2,6 +2,7 @@
 (function () {
   // Хэш-теги
   var textHashtags = document.querySelector('.text__hashtags');
+  var textDescription = document.querySelector('.text__description');
   var MIN_HASHTAG_LENGTH = 2;
   var MAX_HASHTAG_LENGTH = 20;
   var MAX_HASHTAG_COUNT = 5;
@@ -44,10 +45,18 @@
     return false;
   };
 
-  // Отмена закрытие формы при фокусе
+  // Отмена закрытие формы # при фокусе
   textHashtags.addEventListener('keydown', function (evt) {
     if (evt.keyCode === window.constants.ESC_KEYCODE) {
       evt.stopPropagation();
     }
   });
+
+  // Отмена закрытие комментария при фокусе
+  textDescription.addEventListener('keydown', function (evt) {
+    if (evt.keyCode === window.constants.ESC_KEYCODE) {
+      evt.stopPropagation();
+    }
+  });
+
 })();
