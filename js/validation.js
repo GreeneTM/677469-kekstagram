@@ -45,6 +45,14 @@
     return false;
   };
 
+  var uploadSubmit = document.querySelector('.img-upload__submit');
+
+  uploadSubmit.addEventListener('submit', function (evt) {
+    console.log(evt);
+    evt.stopPropagation();
+    console.log(evt);
+  });
+
   // Отмена закрытие формы # при фокусе
   textHashtags.addEventListener('keydown', function (evt) {
     if (evt.keyCode === window.constants.ESC_KEYCODE) {
