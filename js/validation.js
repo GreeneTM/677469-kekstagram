@@ -45,12 +45,25 @@
     return false;
   };
 
+  var mainElement = document.querySelector('main');
   var uploadSubmit = document.querySelector('.img-upload__submit');
 
+  var errorModalTemplate = document.querySelector('#error').content.querySelector('.error');
+  var successModalTemplate = document.querySelector('#success').content.querySelector('.success');
+
+  var onSuccess = function () {
+    var element = successModalTemplate.cloneNode(true);
+    mainElement.appendChild(element);
+  };
+
+  var onError = function () {
+    var element = errorModalTemplate.cloneNode(true);
+    mainElement.appendChild(element);
+  };
+
   uploadSubmit.addEventListener('submit', function (evt) {
-    console.log(evt);
-    evt.stopPropagation();
-    console.log(evt);
+    window.backend.upload(new FormData(uploadSubmit), onSuccess, onError);
+    evt.preventDefault();
   });
 
   // Отмена закрытие формы # при фокусе
